@@ -1,0 +1,16 @@
+<launch>
+	<rosparam>/use_sim_time: 0</rosparam>
+	<!-- planner -->
+	<!-- <rosparam file="$(find trajectory_planner)/cfg/planner_test.yaml" /> -->
+	<!-- <rosparam file="$(find trajectory_planner)/cfg/planner_interactive.yaml" />
+	<node pkg="trajectory_planner" type="poly_RRTStar_goal_node" name="poly_RRTStar_goal_node" output="screen" /> -->
+	<!-- <node pkg="trajectory_planner" type="test2" name="test2" output="screen" /> -->
+
+	<!-- map -->
+	<!-- <arg name="map_location" default="$(find trajectory_planner)/map/lv2_raw.binvox.bt"/> -->
+    <arg name="map_location" default="/home/manh/Documents/DATN/Result/LV2/t23/lv2_2022_t23.binvox.bt"/>
+	<node pkg="octomap_server" type="octomap_server_node" name="octomap_server_node" args="$(arg map_location)" output="log">
+  		<param name="colorFactor" value="0.8" />
+	</node>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find trajectory_planner)/rviz/poly_interactive.rviz"/>
+</launch>
